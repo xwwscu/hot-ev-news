@@ -1,0 +1,14 @@
+.App-tab {
+    display: flex;
+    flex-direction: column;
+    width:'100%';
+    height:'100%';
+}
+
+.am-tab-bar-bar {
+    margin-top: 0;
+}
+
+.am-tab-bar-tab-title {
+    margin-top: 0;
+}
