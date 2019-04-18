@@ -58,7 +58,7 @@ class NewsListContainerComponent extends React.Component<IComponentProps, ICompo
                 this.setState({
                     news: resJson.news,
                     currentPage: page,
-                    totalPage: this.state.totalPage
+                    totalPage: Math.ceil(resJson.total/AppConstants.EV_HOT_NEWS_PAGE_LIMIT)
                 })
             });
     }
@@ -89,8 +89,7 @@ class NewsListContainerComponent extends React.Component<IComponentProps, ICompo
         const isNextBtnDisabled = currentPage < totalPage;
         const pagText = `${currentPage}/${totalPage}`;
         const newsView = news.length === 0
-            ? <div style={{position:"relative", width:"100%", height:"100%", 
-                textAlign:"center", overflow:"hidden", fontSize:20}}>暂无新闻数据</div>
+            ? <div style={{flexGrow:1, alignSelf:"center", textAlign:"center", fontSize:20}}>暂无新闻数据</div>
             : <div style={{display: "flex", flexDirection: "column", width:"100%"}}>
                 <NewsList news={news} />
                 <div className="News-list-pagination">

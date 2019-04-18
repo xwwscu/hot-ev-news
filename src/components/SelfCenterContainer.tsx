@@ -36,7 +36,7 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
             return;
         }
         // tslint:disable-next-line:no-console
-        console.log(this.mTextInput);
+        // console.log(this.mTextInput);
         /* if (!this.textInput.current) {
             // tslint:disable-next-line:no-console
             console.log('onSubmit textInput.current not Exist!');
@@ -49,7 +49,7 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
             return;
         }
         // tslint:disable-next-line:no-console
-        console.log(`onSubmit comment: ${comment}`);
+        // console.log(`onSubmit comment: ${comment}`);
         // this.submitComment(comment);
         if (comment) {
             this.submitComment(comment);
