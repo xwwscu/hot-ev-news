@@ -4,16 +4,26 @@ import * as ActionConstants from './../actions/ActionConstants';
 export default class RootReducer {
 
     public reduceAction(state:IAppState=AppInitState, action: ActionConstants.IAppAction) {
-        if (!action) {
+        if (!action || !action.type) {
             return state;
         }
         switch (action.type) {
             case ActionConstants.UPDATE_WELCOME_SHOWN:
-                return state;
+                return Object.assign({}, state, {
+                    hasWelcomeShown: action.payload.hasWelcomeShown
+                });
             case ActionConstants.UPDATE_LOGIN_STATE_START:
                 return state;
             case ActionConstants.UPDATE_LOGIN_STATE_SUC:
-                return state;
+                return Object.assign({}, state, {
+                            hasLogIn: action.payload.hasLogIn,
+                            userAccount: action.payload.userAccount,
+                            userNickName: action.payload.userNickName,
+                            userId: action.payload.userId,
+                            token: action.payload.token,
+                            userLevel: action.payload.userLevel
+                        });
+                // return state;
             case ActionConstants.UPDATE_LOGIN_STATE_FAIL:
                 return state;
             default:

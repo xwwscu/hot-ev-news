@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { WhiteSpace, TabBar } from 'antd-mobile';
+import { WhiteSpace } from 'antd-mobile';
 import NewsListContainer from './NewsListContainer';
 import CommentsListContainer from './CommentListContainer';
 import './../styles/TabBar.css';
@@ -17,10 +17,12 @@ namespace AppContainer {
 const TabsData = [
     {
         title: 'hot-news',
+        sub: '1',
         component: <NewsListContainer />
     },
     {
         title: 'comments',
+        sub: '2',
         component: <CommentsListContainer />
     }
 ]
@@ -34,48 +36,78 @@ export default class AppContainer extends React.Component<AppContainer.IProps, A
         }
     }
 
-    /* private renderTabContent(tabString: string=TabsData[0].title) {
-        if (tabString === TabsData[1].title) {
-            return TabsData[1].component;
+    private onTabClick = (newTab:string) => {
+        const lastTab = this.state.selectedTab;
+        if (lastTab === newTab) {
+            return;
         }
-        return TabsData[0].component;
-    } */
+        this.setState({
+            selectedTab: newTab
+        })
+    }
 
     public render() {
-
+        const contentView = 
+            this.state.selectedTab === TabsData[0].title 
+            ? TabsData[0].component
+            : TabsData[1].component;
+        
         return (
-            <div className="App-tab am-tab-bar-bar am-tab-bar-tab-title">
+            <div className="App-tab">
+                <div className="App-tab-content">
+                    {contentView}
+                </div>
                 <WhiteSpace />
-                <TabBar noRenderContent={false} barTintColor="#108ee9" 
-                    tintColor="#ff0" unselectedTintColor="#fff"
-                    tabBarPosition='bottom'>
-                    <TabBar.Item
-                        title="快线"
-                        key="hot-news"
-                        // tslint:disable-next-line:jsx-no-lambda
-                        onPress={() => {
-                            this.setState({
-                              selectedTab: 'hot-news',
-                            });
-                        }}
-                        selected={this.state.selectedTab==='hot-news'}>
-                        {<NewsListContainer />}
-                    </TabBar.Item>
-                    <TabBar.Item
-                        title="社区"
-                        key="comments"
-                        // tslint:disable-next-line:jsx-no-lambda
-                        onPress={() => {
-                            this.setState({
-                              selectedTab: 'comments',
-                            });
-                        }}
-                        selected={this.state.selectedTab==='comments'} >
-                        {<CommentsListContainer />}
-                    </TabBar.Item>
-                </TabBar>
+                <div className="App-tab-bottom-bar">
+                    {
+                        TabsData.map((tab, index) => (
+                            this.state.selectedTab === tab.title ?
+                            <div key={index} 
+                                className="App-tab-bottom-bar-selected-item"
+                                onClick={()=>this.onTabClick(tab.title)}>
+                                {tab.title}
+                            </div>
+                            :
+                            // tslint:disable-next-line:jsx-no-lambda
+                            <div key={index} 
+                                onClick={()=>this.onTabClick(tab.title)}>
+                                {tab.title}
+                            </div>
+                        ))
+                    }
+                </div>
                 <WhiteSpace />
             </div>
         );
     }
 }
+
+// className="App-tab am-tab-bar-bar am-tab-bar-tab-title"
+{/* <TabBar noRenderContent={false} barTintColor="#108ee9"
+    tintColor="#ff0" unselectedTintColor="#fff"
+    tabBarPosition='bottom'>
+    <TabBar.Item
+        title="快线"
+        key="hot-news"
+        // tslint:disable-next-line:jsx-no-lambda
+        onPress={() => {
+            this.setState({
+                selectedTab: 'hot-news',
+            });
+        }}
+        selected={this.state.selectedTab === 'hot-news'}>
+        {<NewsListContainer />}
+    </TabBar.Item>
+    <TabBar.Item
+        title="社区"
+        key="comments"
+        // tslint:disable-next-line:jsx-no-lambda
+        onPress={() => {
+            this.setState({
+                selectedTab: 'comments',
+            });
+        }}
+        selected={this.state.selectedTab === 'comments'} >
+        {<CommentsListContainer />}
+    </TabBar.Item>
+</TabBar> */}

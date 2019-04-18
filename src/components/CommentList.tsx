@@ -1,6 +1,9 @@
 import * as React from 'react';
+import { Card } from 'antd-mobile';
 import { IComment } from './../AppConstants';
 import './../styles/CommentList.css';
+import 'antd-mobile/dist/antd-mobile.css';
+import avatarUrl from './../assets/comment-avatar.jpg';
 
 // tslint:disable-next-line:no-namespace
 namespace CommentList {
@@ -11,6 +14,16 @@ namespace CommentList {
 
 export default class CommentList extends React.Component<CommentList.IProps> {
 
+    /* private renderCommentItem = (index: number, comment: IComment) => {
+        return (
+            <div key={index} className="Comments-list-item">
+                <div className="Comments-list-item-user">{comment.from_user.nick_name}</div>
+                <div className="Comments-list-item-comment">{comment.comment}</div>
+                <div className="Comments-list-item-date">{comment.time}</div>
+            </div>
+        );
+    } */
+
     public render() {
         const comments = this.props.comments || [];
         const listView = comments.length === 0 
@@ -18,11 +31,17 @@ export default class CommentList extends React.Component<CommentList.IProps> {
             : <div>
                 {
                     comments.map((comment, index) => (
-                        <div key={index} className="Comments-list-item">
-                            <div className="Comments-list-item-user">{comment.from_user.nick_name}</div>
-                            <div className="Comments-list-item-comment">{comment.comment}</div>
-                            <div className="Comments-list-item-date">{comment.time}</div>
-                        </div>
+                        <Card key={index}>
+                            <Card.Header
+                                title={comment.from_user.nick_name}
+                                thumb={avatarUrl}
+                                thumbStyle={{width:40, height:40}}
+                            />
+                            <Card.Body>
+                                <div style={{width:"100%", textAlign:"center"}}>{comment.comment}</div>
+                            </Card.Body>
+                            <Card.Footer extra={comment.time.substring(0, comment.time.indexOf('T'))} />
+                        </Card>
                     ))
                 }
              </div>

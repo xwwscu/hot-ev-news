@@ -1,0 +1,23 @@
+.SelfCenter {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 2px 8px;
+}
+
+.SelfCenter-info {
+    flex-grow: 1;
+    padding-bottom: 10px;
+}
+
+.SelfCenter-comment {
+    flex-grow: 1;
+    margin-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.SelfCenter-footer {
+    width: 100%;
+    align-self: flex-end;
+}

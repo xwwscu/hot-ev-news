@@ -10,7 +10,8 @@
 .News-list-items {
     display: flex;
     flex-direction: column;
-    height: 85px;
+    align-items: center;
+    min-height: 85px;
     margin-bottom: 5px;
     background: rgb(236, 236, 236);
 }
@@ -20,10 +21,8 @@
     color: #000;
     font-weight: bold;
     margin: 0;
-    padding: 4px 20px 20px 2px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    padding: 5px 20px 20px 2px;
+    text-align: center;
 }
 
 .News-list-items-title-en {
@@ -32,30 +31,51 @@
     font-weight: bold;
     margin: 0;
     padding: 0 20px 20px 5px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    text-align: center;
 }
 
 .News-list-items-desc {
     display: flex;
     flex-direction: row;
     width: 100%;
+    justify-content: space-around;
     margin-left: 20px;
     margin-right: 20px;
     padding-bottom: 3px;
 }
 
 .News-list-items-desc-from {
-    width: 50%;
-    float: left;
     font-size: 12px;
     left: 5px;
 }
 
 .News-list-items-desc-date {
-    width: 50%;
-    float: right;
     font-size: 10px;
     right: -10px;
 }
+
+.News-list-pagination {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.News-list-pagination-text {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.am-pagination-wrap {
+    font-size: 16px;
+}
+
+.am-button {
+    padding: 0 8px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+}
+

@@ -11,10 +11,12 @@
     "ordered-imports": false,
     "jsx-boolean-value": false,
     "object-literal-sort-keys": false,
-    "member-ordering": false
+    "member-ordering": false,
+    "jsx-no-lambda": false
   },
   "jsRules": {
     "object-literal-sort-keys": false,
-    "member-ordering": false
+    "member-ordering": false,
+    "jsx-no-lambda": false
   }
 }

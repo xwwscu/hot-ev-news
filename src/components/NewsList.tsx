@@ -4,16 +4,15 @@ import { INews } from './../AppConstants';
 import './../styles/NewsList.css';
 
 interface INewsListProps {
-    news?: INews[];
+    news: INews[];
 }
 
 export default class NewsList extends React.Component<INewsListProps> {
 
     public render() {
-        const news = this.props.news || [];
-        const newsList = news.length === 0 
-            ? <div className="News-list-empty">暂无新闻数据</div>
-            : <div>
+        const news = this.props.news;
+        const newsList = 
+            <div style={{display:'flex', flexDirection:'column', flexGrow:1}}>
                 {
                     news.map((newsItem, index) => (
                         <Link key={index} to={{
@@ -34,10 +33,10 @@ export default class NewsList extends React.Component<INewsListProps> {
                         </Link>
                     ))
                 }
-              </div>
+            </div>
             
         return (
-            <div style={{display:'flex', flexDirection:'column', flexGrow:1}}>
+            <div>
                 {newsList}
             </div>
         );

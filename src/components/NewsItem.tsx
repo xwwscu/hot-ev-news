@@ -23,22 +23,24 @@ export default class NewsItem extends React.Component<INewsItemProps> {
         // tslint:disable-next-line:jsx-no-lambda
         ? <div className="News-item-back" onClick={()=>history.goBack()}>返回</div> 
         : null;
+        const detailView = !locationData || !locationData.state.detail_url 
+        ? null 
+        : <div className="News-item-detail">
+            <Link to={{
+                pathname: '/news-detail',
+                state: locationData.state.detail_url
+        }}>阅读原文</Link>
+    </div>
         const newsItemView = locationData
             ? <div className="News-item">
                 {backView}
                 <h5 className="News-item-title">{locationData.state.title}</h5>
                 <h5 className="News-item-title-en">{locationData.state.title_en}</h5>
                 <div className="News-item-from">{locationData.state.from}</div>
-                <div className="News-item-date">{locationData.state.time}</div>
+                <div className="News-item-date">{locationData.state.time.substring(0, locationData.state.time.indexOf('T'))}</div>
                 <div className="News-item-abstract">{locationData.state.content}</div>
                 <div className="News-item-abstract-en">{locationData.state.content_en}</div>
-                <Link to={{
-                    pathname:'/news-detail',
-                    state: locationData.state.detail_url
-                }}>阅读原文</Link>
-                <Link to={{
-                    pathname:'/comments'
-                }}>看评论</Link>
+                {detailView}
             </div>
             : <div>出错啦...</div>
         return (

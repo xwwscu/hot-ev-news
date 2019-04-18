@@ -15,4 +15,11 @@ export default class ActionGetter {
             payload: ''
         }
     }
+
+    public static getLogInSucAction(payload: any): ActionConstants.IAppAction {
+        return {
+            type: ActionConstants.UPDATE_LOGIN_STATE_SUC,
+            payload,
+        }
+    }
 }

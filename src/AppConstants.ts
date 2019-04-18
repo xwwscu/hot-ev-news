@@ -5,8 +5,10 @@ export interface IAppState {
     hasLogIn: boolean;
     hasWelcomeShown: boolean;
     userAccount: string;
+    userId: string;
     userNickName: string;
     token: string;
+    userLevel: number;
     pageNum: number;
 }
 
@@ -14,8 +16,10 @@ export const AppInitState: IAppState = {
     hasLogIn: false,
     hasWelcomeShown: false,
     userAccount: 'unknown',
+    userId: 'unknown',
     userNickName: 'unknown',
     token: 'unknown',
+    userLevel: 100,
     pageNum: 0
 }
 
@@ -39,3 +43,4 @@ export interface IComment {
 
 export const EV_HOT_NEWS_BASE_URL = 'http://www.xiaoliusuibianwan.com/ev-news/';
 export const EV_HOT_NEWS_BASE_URL_DEBUG = 'http://localhost:8182/ev-news/';
+export const EV_HOT_NEWS_USER_THRESH = 100;

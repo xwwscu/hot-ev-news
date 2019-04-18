@@ -25,6 +25,10 @@ class CommentListWrapper extends
         }
     }
 
+    public shouldComponentUpdate() {
+        return this.state.comments.length <= 0;
+    }
+
     public componentDidMount() {
         const fetchUrl = AppConstants.EV_HOT_NEWS_BASE_URL_DEBUG + 'get-app-comment';
         fetch(fetchUrl, {
