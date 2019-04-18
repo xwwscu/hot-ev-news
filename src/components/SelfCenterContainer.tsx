@@ -18,7 +18,8 @@ namespace SelfCenter {
 }
 
 class SelfCenter extends React.Component<SelfCenter.IProps> {
-    private textInput: React.RefObject<TextareaItem> = React.createRef<TextareaItem>();
+    // private textInput: React.RefObject<TextareaItem> = React.createRef<TextareaItem>();
+    private mTextInput: TextareaItem;
 
     constructor(props:SelfCenter.IProps) {
         super(props);
@@ -29,12 +30,19 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
     } */
 
     private onSubmit = () => {
-        if (!this.textInput.current) {
+        if (!this.mTextInput) {
+            // tslint:disable-next-line:no-console
+            console.log('onSubmit mTextInput is NULL!');
+            return;
+        }
+        // tslint:disable-next-line:no-console
+        console.log(this.mTextInput);
+        /* if (!this.textInput.current) {
             // tslint:disable-next-line:no-console
             console.log('onSubmit textInput.current not Exist!');
             return;
-        }
-        const comment = this.textInput.current.props.value;
+        } */
+        const comment = this.mTextInput.state.value;
         const isInValidComment = !comment || comment.trim().length<=0;
         if (isInValidComment) {
             Toast.info('请输入有效评论!')
@@ -65,10 +73,13 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
         .then(jsonResp => {
             // tslint:disable-next-line:no-console
             console.log(jsonResp);
-            if (jsonResp.status === 200) {
+            if (jsonResp.msg === 'ok') {
                 Toast.info('恭喜，评论成功!');
-                if (this.textInput.current) {
+                /* if (this.textInput.current) {
                     this.textInput.current.clearInput();
+                } */
+                if (this.mTextInput) {
+                    this.mTextInput.clearInput();
                 }
             } else {
                 Toast.info('抱歉，评论失败了!联系管理员吧!');
@@ -102,7 +113,7 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
                 <div className="SelfCenter-comment">
                     <List renderHeader={'发表评论'}>
                         <TextareaItem
-                            ref={(el: any) => this.textInput = el}
+                            ref={(el: any) => this.mTextInput = el}
                             placeholder={'天空虽不曾留下痕迹，但我已飞过...'}
                             rows={5}
                             count={100} />
