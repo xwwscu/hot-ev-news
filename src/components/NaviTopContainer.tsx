@@ -2,11 +2,15 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { NavBar, Modal, Toast } from 'antd-mobile';
 import * as AppConstants from '../AppConstants';
 import ActionGetter from './../actions/ActionGetter';
 import './../styles/TabBar.css';
-import 'antd-mobile/dist/antd-mobile.css';
+import NavBar from 'antd-mobile/lib/nav-bar';
+import 'antd-mobile/lib/nav-bar/style/css';
+import Modal from 'antd-mobile/lib/modal';
+import 'antd-mobile/lib/modal/style/css';
+import Toast from 'antd-mobile/lib/toast';
+import 'antd-mobile/lib/toast/style/css';
 import avatarUrl from './../assets/avatar.png';
 
 interface INaviTopProps {

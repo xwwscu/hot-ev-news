@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Card } from 'antd-mobile';
 import { IComment } from './../AppConstants';
 import './../styles/CommentList.css';
-import 'antd-mobile/dist/antd-mobile.css';
+import Card from 'antd-mobile/lib/card';
+import 'antd-mobile/lib/card/style/css';
 import avatarUrl from './../assets/comment-avatar.jpg';
 
 // tslint:disable-next-line:no-namespace

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { WhiteSpace } from 'antd-mobile';
 import NewsListContainer from './NewsListContainer';
 import CommentsListContainer from './CommentListContainer';
 import './../styles/TabBar.css';
+import WhiteSpace from 'antd-mobile/lib/white-space';
+import 'antd-mobile/lib/white-space/style/css';
 
 // tslint:disable-next-line:no-namespace
 namespace AppContainer {
@@ -76,7 +77,6 @@ export default class AppContainer extends React.Component<AppContainer.IProps, A
                         ))
                     }
                 </div>
-                <WhiteSpace />
             </div>
         );
     }

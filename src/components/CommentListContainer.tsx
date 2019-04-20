@@ -2,8 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import * as AppConstants from './../AppConstants';
 import CommentList from './CommentList';
-import { Button, Toast } from 'antd-mobile';
-import 'antd-mobile/dist/antd-mobile.css';
+import Button from 'antd-mobile/lib/button';
+import 'antd-mobile/lib/button/style/css';
+import Toast from 'antd-mobile/lib/toast';
+import 'antd-mobile/lib/toast/style/css';
 
 // tslint:disable-next-line:no-namespace
 namespace CommentListContainer {

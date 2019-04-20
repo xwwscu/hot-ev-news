@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { List, Button, TextareaItem, Toast } from 'antd-mobile';
 import * as AppConstants from './../AppConstants';
 import CopyRightFooter from './CopyRightFooter';
 import './../styles/SelfCenter.css';
-import 'antd-mobile/dist/antd-mobile.css';
+import List from 'antd-mobile/lib/list';
+import 'antd-mobile/lib/list/style/css';
+import Button from 'antd-mobile/lib/button';
+import 'antd-mobile/lib/button/style/css';
+import Toast from 'antd-mobile/lib/toast';
+import 'antd-mobile/lib/toast/style/css';
+import TextareaItem from 'antd-mobile/lib/textarea-item';
+import 'antd-mobile/lib/textarea-item/style/css';
 
 // tslint:disable-next-line:no-namespace
 namespace SelfCenter {
