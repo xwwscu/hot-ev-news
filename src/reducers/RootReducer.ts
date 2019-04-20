@@ -26,6 +26,18 @@ export default class RootReducer {
                 // return state;
             case ActionConstants.UPDATE_LOGIN_STATE_FAIL:
                 return state;
+            case ActionConstants.UPDATE_HOT_NEWS_DATA:
+                return Object.assign({}, state, {
+                    newsPageData: action.payload.newsPageData,
+                    newsPageNum: action.payload.newsPageNum,
+                    newsTotalPage: action.payload.newsTotalPage
+                });
+            case ActionConstants.UPDATE_APP_COMMENTS_DATA:
+                return Object.assign({}, state, {
+                    commentPageData: action.payload.commentPageData,
+                    commentPageNum: action.payload.commentPageNum,
+                    commentTotalPage: action.payload.commentTotalPage
+                });
             default:
                 return state;
         }

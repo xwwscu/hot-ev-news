@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import * as AppConstants from './../AppConstants';
 import CommentList from './CommentList';
@@ -6,12 +7,17 @@ import Button from 'antd-mobile/lib/button';
 import 'antd-mobile/lib/button/style/css';
 import Toast from 'antd-mobile/lib/toast';
 import 'antd-mobile/lib/toast/style/css';
+import ActionGetter from 'src/actions/ActionGetter';
 
 // tslint:disable-next-line:no-namespace
 namespace CommentListContainer {
     export interface IProps {
         hasLogIn: boolean;
         token: string;
+        commentTotalPage: number;
+        commentPageNum: number;
+        commentPageData: AppConstants.IComment[];
+        dispatchComments: (payload: any) => void;
     }
 
     export interface IState{
@@ -21,24 +27,20 @@ namespace CommentListContainer {
     }
 }
 
-class CommentListWrapper extends 
-    React.Component<CommentListContainer.IProps, CommentListContainer.IState> {
+class CommentListWrapper extends React.Component<CommentListContainer.IProps> {
     
     constructor(props: CommentListContainer.IProps) {
         super(props);
-        this.state = {
-            comments: [],
-            currentPage: 0,
-            totalPage: 1
+    }
+
+    public componentWillMount() {
+        const shouldFetchData = this.props.commentPageData.length <= 0;
+        if (!shouldFetchData) {
+            // tslint:disable-next-line:no-console
+            console.log(`CommentListContainer componentMount ${shouldFetchData}`);
+            return;
         }
-    }
-
-    public shouldComponentUpdate() {
-        return this.state.comments.length <= 0;
-    }
-
-    public componentDidMount() {
-        const page = this.state.currentPage || 1;
+        const page = this.props.commentPageNum || 1;
         this.fetchAppComments(page, this.props.token);
     }
 
@@ -56,11 +58,12 @@ class CommentListWrapper extends
         .then(jsonResp => {
             // tslint:disable-next-line:no-console
             console.log(jsonResp);
-            this.setState({
-                comments: jsonResp.app_comments,
-                currentPage: page,
-                totalPage: Math.ceil(jsonResp.total/AppConstants.EV_HOT_NEWS_PAGE_LIMIT)
-            });
+            const commentPayload = {
+                commentPageData: jsonResp.app_comments,
+                commentPageNum: page,
+                commentTotalPage: Math.ceil(jsonResp.total/AppConstants.EV_HOT_NEWS_PAGE_LIMIT)
+            }
+            this.props.dispatchComments(commentPayload);
         });
     }
 
@@ -71,28 +74,28 @@ class CommentListWrapper extends
         }
         let nextPage: number;
         if (action === "next") {
-            nextPage = this.state.currentPage + 1;
+            nextPage = this.props.commentPageNum + 1;
         } else {
-            nextPage = this.state.currentPage - 1;
+            nextPage = this.props.commentPageNum - 1;
         }
         // tslint:disable-next-line:no-console
-        console.log(`CommentListContainer onPageBtn cur:${this.state.currentPage}, next:${nextPage}`);
+        console.log(`CommentListContainer onPageBtn cur:${this.props.commentPageNum}, next:${nextPage}`);
         this.fetchAppComments(nextPage, this.props.token);
     }
 
     public render() {
-        const { comments, currentPage, totalPage } = this.state;
+        const { commentPageData, commentPageNum, commentTotalPage } = this.props;
         const pagiLocale = {
             prevText: '上一页',
             nextText: '下一页',
         };
-        const isPrevBtnDisabled = currentPage <= 1;
-        const isNextBtnDisabled = currentPage < totalPage;
-        const pagText = `${currentPage}/${totalPage}`;
-        const commentsListView = comments.length === 0
+        const isPrevBtnDisabled = commentPageNum <= 1;
+        const isNextBtnDisabled = commentPageNum < commentTotalPage;
+        const pagText = `${commentPageNum}/${commentTotalPage}`;
+        const commentsListView = commentPageData.length === 0
             ? <div style={{flexGrow:1, alignSelf:"center", textAlign:"center", fontSize:20}}>暂无评论数据</div>
             : <div style={{display: "flex", flexDirection: "column", width:"100%"}}>
-                <CommentList comments={comments}/>
+                <CommentList comments={commentPageData}/>
                 <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"center", alignItems:"center"}}>
                     <Button 
                         disabled={isPrevBtnDisabled} 
@@ -118,9 +121,18 @@ class CommentListWrapper extends
 const mapStateToProps = (state: AppConstants.IAppState) => (
     {
         hasLogIn: state.hasLogIn,
-        token: state.token
+        token: state.token,
+        commentPageData: state.commentPageData,
+        commentPageNum: state.commentPageNum,
+        commentTotalPage: state.commentTotalPage
     }
 );
 
-const CommentListContainer = connect(mapStateToProps, null)(CommentListWrapper);
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        dispatchComments: (payload: any) => dispatch(ActionGetter.getUpdateCommentAction(payload))
+    }
+}
+
+const CommentListContainer = connect(mapStateToProps, mapDispatchToProps)(CommentListWrapper);
 export default CommentListContainer;

@@ -9,7 +9,12 @@ export interface IAppState {
     userNickName: string;
     token: string;
     userLevel: number;
-    pageNum: number;
+    newsTotalPage: number;
+    newsPageNum: number;
+    newsPageData: INews[];
+    commentTotalPage: number;
+    commentPageNum: number;
+    commentPageData: IComment[];
 }
 
 export const AppInitState: IAppState = {
@@ -20,7 +25,12 @@ export const AppInitState: IAppState = {
     userNickName: 'unknown',
     token: 'unknown',
     userLevel: 100,
-    pageNum: 0
+    newsTotalPage: 0,
+    newsPageNum: 0,
+    newsPageData: [],
+    commentTotalPage: 0,
+    commentPageNum: 0,
+    commentPageData: []
 }
 
 export interface INews {
@@ -44,4 +54,4 @@ export interface IComment {
 export const EV_HOT_NEWS_BASE_URL = 'http://www.xiaoliusuibianwan.com/ev-news/';
 export const EV_HOT_NEWS_BASE_URL_DEBUG = 'http://localhost:8182/ev-news/';
 export const EV_HOT_NEWS_USER_THRESH = 100;
-export const EV_HOT_NEWS_PAGE_LIMIT = 8;
+export const EV_HOT_NEWS_PAGE_LIMIT = 6;

@@ -22,4 +22,18 @@ export default class ActionGetter {
             payload,
         }
     }
+
+    public static getUpdateNewsAction(payload: any): ActionConstants.IAppAction {
+        return {
+            type: ActionConstants.UPDATE_HOT_NEWS_DATA,
+            payload
+        }
+    }
+
+    public static getUpdateCommentAction(payload: any): ActionConstants.IAppAction {
+        return {
+            type: ActionConstants.UPDATE_APP_COMMENTS_DATA,
+            payload
+        }
+    }
 }

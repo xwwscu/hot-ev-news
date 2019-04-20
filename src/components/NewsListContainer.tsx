@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import * as AppConstants from './../AppConstants';
+import ActionGetter from './../actions/ActionGetter';
 import NewsList from './NewsList';
 import Button from 'antd-mobile/lib/button';
 import 'antd-mobile/lib/button/style/css';
@@ -10,33 +12,42 @@ import 'antd-mobile/lib/toast/style/css';
 interface IComponentProps {
     hasLogIn: boolean;
     token: string;
-    pageNum: number;
+    newsPageNum: number;
+    newsTotalPage: number;
+    newsPageData: AppConstants.INews[]
+    dispatchNewsData: (payload: any) => void;
 }
 
-interface IComponentState {
+/* interface IComponentState {
     news: AppConstants.INews[],
     currentPage: number,
     totalPage: number
-}
+} */
 
-class NewsListContainerComponent extends React.Component<IComponentProps, IComponentState> {
+class NewsListContainerComponent extends React.Component<IComponentProps> {
 
     constructor(props: IComponentProps) {
         super(props);
-        this.state = {
-            news: [],
-            currentPage: 0,
-            totalPage: 1
+        
+    }
+
+    /* public shouldComponentUpdate(nextProps: IComponentProps) {
+        const shouldUpdate = this.props.newsPageData.length <= 0 
+            || this.props.newsPageNum === nextProps.newsPageNum;
+        // tslint:disable-next-line:no-console
+        console.log(`NewsListContainer shouldComponentUpdate: ${shouldUpdate}`);
+        return shouldUpdate;
+    } */
+
+    public componentWillMount() {
+        const shouldUpdate = this.props.newsPageData.length <= 0;
+        // tslint:disable-next-line:no-console
+        console.log(`NewsListContainer componentWillMount: ${shouldUpdate}`);
+        if (!shouldUpdate) {
+            return;
         }
-    }
-
-    public shouldComponentUpdate() {
-        return this.state.news.length <= 0;
-    }
-
-    public componentDidMount() {
         // fetch data
-        const currentPage = this.state.currentPage || 1;
+        const currentPage = this.props.newsPageNum || 1;
         this.fetchHotNews(currentPage);
     }
 
@@ -57,11 +68,17 @@ class NewsListContainerComponent extends React.Component<IComponentProps, ICompo
             .then((resJson) => {
                 // tslint:disable-next-line:no-console
                 console.log(resJson);
-                this.setState({
+                const payloadData = {
+                    newsPageData: resJson.news,
+                    newsPageNum: page,
+                    newsTotalPage: Math.ceil(resJson.total/AppConstants.EV_HOT_NEWS_PAGE_LIMIT)
+                }
+                this.props.dispatchNewsData(payloadData);
+                /* this.setState({
                     news: resJson.news,
                     currentPage: page,
                     totalPage: Math.ceil(resJson.total/AppConstants.EV_HOT_NEWS_PAGE_LIMIT)
-                })
+                }) */
             });
     }
 
@@ -72,28 +89,28 @@ class NewsListContainerComponent extends React.Component<IComponentProps, ICompo
         }
         let nextPage: number;
         if (action === "next") {
-            nextPage = this.state.currentPage + 1;
+            nextPage = this.props.newsPageNum + 1;
         } else {
-            nextPage = this.state.currentPage - 1;
+            nextPage = this.props.newsPageNum - 1;
         }
         // tslint:disable-next-line:no-console
-        console.log(`NewsListContainer onPageBtn cur:${this.state.currentPage}, next:${nextPage}`);
+        console.log(`NewsListContainer onPageBtn cur:${this.props.newsPageNum}, next:${nextPage}`);
         this.fetchHotNews(nextPage, this.props.token);
     }
 
     public render() {
-        const { news, currentPage, totalPage } = this.state;
+        const { newsPageData, newsPageNum, newsTotalPage } = this.props;
         const pagiLocale = {
             prevText: '上一页',
             nextText: '下一页',
         };
-        const isPrevBtnDisabled = currentPage <= 1;
-        const isNextBtnDisabled = currentPage < totalPage;
-        const pagText = `${currentPage}/${totalPage}`;
-        const newsView = news.length === 0
+        const isPrevBtnDisabled = newsPageNum <= 1;
+        const isNextBtnDisabled = newsPageNum < newsTotalPage;
+        const pagText = `${newsPageNum}/${newsTotalPage}`;
+        const newsView = newsPageData.length === 0
             ? <div style={{flexGrow:1, alignSelf:"center", textAlign:"center", fontSize:20}}>暂无新闻数据</div>
             : <div style={{display: "flex", flexDirection: "column", width:"100%"}}>
-                <NewsList news={news} />
+                <NewsList news={newsPageData} />
                 <div className="News-list-pagination">
                     <Button 
                         disabled={isPrevBtnDisabled} 
@@ -120,11 +137,19 @@ const mapStateToProps = (state: AppConstants.IAppState) => {
     return {
         hasLogIn: state.hasLogIn,
         token: state.token,
-        pageNum: state.pageNum
+        newsPageNum: state.newsPageNum,
+        newsPageData: state.newsPageData,
+        newsTotalPage: state.newsTotalPage
     }
 };
 
-// const mapDispatchToProps;
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        dispatchNewsData: (payload: any) => {
+            dispatch(ActionGetter.getUpdateNewsAction(payload));
+        }
+    }
+}
 
-const NewsListContainer = connect(mapStateToProps, null)(NewsListContainerComponent);
+const NewsListContainer = connect(mapStateToProps, mapDispatchToProps)(NewsListContainerComponent);
 export default NewsListContainer;
