@@ -64,7 +64,7 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
     }
 
     private submitComment = (comment: string) => {
-        const requestUrl = AppConstants.EV_HOT_NEWS_BASE_URL_DEBUG + 'post-app-comment';
+        const requestUrl = AppConstants.EV_HOT_NEWS_BASE_URL + 'post-app-comment';
         const commentData = {
             user_id: this.props.userId,
             token: this.props.token,

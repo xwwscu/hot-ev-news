@@ -63,7 +63,7 @@ class NaviTopComponent extends React.Component<INaviTopProps, INaviTopState> {
             Toast.info('请输入有效密码!')
             return;
         }
-        const logInUrl = AppConstants.EV_HOT_NEWS_BASE_URL_DEBUG + 'user-login';
+        const logInUrl = AppConstants.EV_HOT_NEWS_BASE_URL + 'user-login';
         const bodyData = {
             name: account,
             pwd,

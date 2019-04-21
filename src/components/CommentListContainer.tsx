@@ -45,7 +45,7 @@ class CommentListWrapper extends React.Component<CommentListContainer.IProps> {
     }
 
     private fetchAppComments = (page: number, token?: string) => {
-        let fetchUrl = AppConstants.EV_HOT_NEWS_BASE_URL_DEBUG + `get-app-comment?page=${page}`;
+        let fetchUrl = AppConstants.EV_HOT_NEWS_BASE_URL + `get-app-comment?page=${page}`;
         if (token) {
             fetchUrl += `&token=${token}`;
         }

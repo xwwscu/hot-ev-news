@@ -53,7 +53,7 @@ class NewsListContainerComponent extends React.Component<IComponentProps> {
 
     private fetchHotNews(page: number, token?: string) {
         // const page = this.state.currentPage + 1;
-        let requestUrl = AppConstants.EV_HOT_NEWS_BASE_URL_DEBUG + 'get-hot?page=' + page;
+        let requestUrl = AppConstants.EV_HOT_NEWS_BASE_URL + 'get-hot?page=' + page;
         if (token) {
             requestUrl = requestUrl + `&token=${token}`;
         }
