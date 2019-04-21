@@ -17,6 +17,18 @@
     margin-bottom: 10px;
 }
 
+.SelfCenter-comment-header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.SelfCenter-comment-more {
+    align-self: flex-end;
+    color: green;
+}
+
 .SelfCenter-footer {
     width: 100%;
     align-self: flex-end;

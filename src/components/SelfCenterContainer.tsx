@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as AppConstants from './../AppConstants';
 import CopyRightFooter from './CopyRightFooter';
 import './../styles/SelfCenter.css';
@@ -94,6 +95,14 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
     }
 
     public render() {
+        const listHeader = <div className="SelfCenter-comment-header">
+                              <div>发表评论</div>
+                              <div className="SelfCenter-comment-more">
+                                 <Link to={{
+                                    pathname:'/'
+                                 }}>更多评论</Link>
+                              </div>
+                           </div>
         return (
             <div className="SelfCenter">
                 <div className="SelfCenter-info">
@@ -116,8 +125,9 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
                             disabled />
                     </List>
                 </div>
+
                 <div className="SelfCenter-comment">
-                    <List renderHeader={'发表评论'}>
+                    <List renderHeader={listHeader}>
                         <TextareaItem
                             ref={(el: any) => this.mTextInput = el}
                             placeholder={'天空虽不曾留下痕迹，但我已飞过...'}
