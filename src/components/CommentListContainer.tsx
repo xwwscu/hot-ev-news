@@ -90,7 +90,7 @@ class CommentListWrapper extends React.Component<CommentListContainer.IProps> {
             nextText: '下一页',
         };
         const isPrevBtnDisabled = commentPageNum <= 1;
-        const isNextBtnDisabled = commentPageNum < commentTotalPage;
+        const isNextBtnDisabled = commentPageNum >= commentTotalPage;
         const pagText = `${commentPageNum}/${commentTotalPage}`;
         const commentsListView = commentPageData.length === 0
             ? <div style={{flexGrow:1, alignSelf:"center", textAlign:"center", fontSize:20}}>暂无评论数据</div>

@@ -79,7 +79,7 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
         }).then(response => response.json())
         .then(jsonResp => {
             // tslint:disable-next-line:no-console
-            console.log(jsonResp);
+            // console.log(jsonResp);
             if (jsonResp.msg === 'ok') {
                 Toast.info('恭喜，评论成功!');
                 /* if (this.textInput.current) {

@@ -78,7 +78,7 @@ class NaviTopComponent extends React.Component<INaviTopProps, INaviTopState> {
         }).then(response => response.json())
         .then(jsonResp => {
             // tslint:disable-next-line:no-console
-            console.log(jsonResp);
+            // console.log(jsonResp);
             this.props.toggleLogInSuc({
                 userAccount: account,
                 userId: jsonResp.user_id,

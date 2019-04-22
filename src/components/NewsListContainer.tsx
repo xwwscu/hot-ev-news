@@ -32,11 +32,11 @@ class NewsListContainerComponent extends React.Component<IComponentProps> {
     }
 
     /* public shouldComponentUpdate(nextProps: IComponentProps) {
-        const shouldUpdate = this.props.newsPageData.length <= 0 
-            || this.props.newsPageNum === nextProps.newsPageNum;
+        const shouldNotUpdate = this.props.newsPageData.length <= 0 
+            && this.props.newsPageNum === nextProps.newsPageNum && this.props.hasLogIn === nextProps.hasLogIn;
         // tslint:disable-next-line:no-console
-        console.log(`NewsListContainer shouldComponentUpdate: ${shouldUpdate}`);
-        return shouldUpdate;
+        console.log(`NewsListContainer shouldComponentNotUpdate: ${shouldNotUpdate}`);
+        return !shouldNotUpdate;
     } */
 
     public componentWillMount() {
@@ -58,7 +58,7 @@ class NewsListContainerComponent extends React.Component<IComponentProps> {
             requestUrl = requestUrl + `&token=${token}`;
         }
         // tslint:disable-next-line:no-console
-        console.log(requestUrl);
+        // console.log(requestUrl);
         fetch(requestUrl, {
             method: 'GET',
             headers: {
@@ -67,7 +67,7 @@ class NewsListContainerComponent extends React.Component<IComponentProps> {
             .then(response => response.json())
             .then((resJson) => {
                 // tslint:disable-next-line:no-console
-                console.log(resJson);
+                // console.log(resJson);
                 const payloadData = {
                     newsPageData: resJson.news,
                     newsPageNum: page,
@@ -119,7 +119,7 @@ class NewsListContainerComponent extends React.Component<IComponentProps> {
                     </Button>
                     <span className="News-list-pagination-text">{pagText}</span>
                     <Button 
-                        disabled={isNextBtnDisabled}
+                        disabled={!isNextBtnDisabled}
                         onClick={()=>this.onPageBtnClicked("next")}>
                         {pagiLocale.nextText}
                     </Button>
