@@ -57,7 +57,7 @@ class CommentListWrapper extends React.Component<CommentListContainer.IProps> {
         }).then(response => response.json())
         .then(jsonResp => {
             // tslint:disable-next-line:no-console
-            console.log(jsonResp);
+            // console.log(jsonResp);
             const commentPayload = {
                 commentPageData: jsonResp.app_comments,
                 commentPageNum: page,
