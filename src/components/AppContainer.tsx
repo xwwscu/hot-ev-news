@@ -17,12 +17,12 @@ namespace AppContainer {
 
 const TabsData = [
     {
-        title: 'hot-news',
+        title: '热闻',
         sub: '1',
         component: <NewsListContainer />
     },
     {
-        title: 'comments',
+        title: '心声',
         sub: '2',
         component: <CommentsListContainer />
     }

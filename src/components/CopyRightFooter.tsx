@@ -6,7 +6,7 @@ export default class CopyRightFooter extends React.Component {
         return (
             <footer>
                 <div style={{width:"100%", textAlign: "center", margin:5}}>
-                    &copy;&nbsp;2019 xww.Byton. All Rights Reserved.
+                    &copy;&nbsp;2020 xww.Byton. All Rights Reserved.
                 </div>
             </footer>
         );

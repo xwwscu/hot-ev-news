@@ -51,7 +51,7 @@ export interface IComment {
     time: string;
 }
 
-export const EV_HOT_NEWS_BASE_URL = 'http://www.xiaoliusuibianwan.com/ev-news/';
+export const EV_HOT_NEWS_BASE_URL = 'http://www.dadiscoder.com/ev-news/';
 export const EV_HOT_NEWS_BASE_URL_DEBUG = 'http://localhost:8182/ev-news/';
 export const EV_HOT_NEWS_USER_THRESH = 100;
 export const EV_HOT_NEWS_PAGE_LIMIT = 6;
