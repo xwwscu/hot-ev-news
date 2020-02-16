@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Modal from 'antd-mobile/lib/modal';
 import 'antd-mobile/lib/modal/style/css';
-import { setInterval } from 'timers';
 
 // tslint:disable-next-line:no-namespace
 namespace SplashComponent {
@@ -42,6 +41,12 @@ export default class SplashComponent extends React.Component<SplashComponent.IPr
                 });
             }
         }, 1000);
+    }
+
+    public componentWillUnmount() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+        }
     }
 
     private onClosed() {
