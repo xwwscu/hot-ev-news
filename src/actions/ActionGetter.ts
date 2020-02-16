@@ -9,10 +9,10 @@ export default class ActionGetter {
         }
     }
 
-    public static getUpdateWelcomeAction(): ActionConstants.IAppAction {
+    public static getUpdateWelcomeAction(payload: any): ActionConstants.IAppAction {
         return {
-            type: '',
-            payload: ''
+            type: ActionConstants.UPDATE_WELCOME_SHOWN,
+            payload
         }
     }
 

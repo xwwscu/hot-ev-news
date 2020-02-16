@@ -14,7 +14,7 @@ interface IComponentProps {
     token: string;
     newsPageNum: number;
     newsTotalPage: number;
-    newsPageData: AppConstants.INews[]
+    newsPageData: AppConstants.INews[];
     dispatchNewsData: (payload: any) => void;
 }
 
@@ -42,7 +42,7 @@ class NewsListContainerComponent extends React.Component<IComponentProps> {
     public componentWillMount() {
         const shouldUpdate = this.props.newsPageData.length <= 0;
         // tslint:disable-next-line:no-console
-        console.log(`NewsListContainer componentWillMount: ${shouldUpdate}`);
+        // console.log(`NewsListContainer componentWillMount: ${shouldUpdate}`);
         if (!shouldUpdate) {
             return;
         }
