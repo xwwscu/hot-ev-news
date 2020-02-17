@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { INews } from './../AppConstants';
 import CopyRightFooter from './CopyRightFooter';
 import './../styles/NewsItem.css';
@@ -26,11 +26,16 @@ export default class NewsItem extends React.Component<INewsItemProps> {
         const detailView = !locationData || !locationData.state.detail_url 
         ? null 
         : <div className="News-item-detail">
-            <Link to={{
+            {
+                <span>
+                    <a href={locationData.state.detail_url} target="_blank" 
+                        rel="noopener noreferrer">阅读原文</a>
+                </span>
+            /* <Link to={{
                 pathname: '/news-detail',
                 state: locationData.state.detail_url
-        }}>阅读原文</Link>
-    </div>
+             }}>阅读原文</Link> */}
+        </div>
         const newsItemView = locationData
             ? <div className="News-item">
                 {backView}

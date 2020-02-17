@@ -35,9 +35,9 @@ class CommentListWrapper extends React.Component<CommentListContainer.IProps> {
 
     public componentWillMount() {
         const shouldFetchData = this.props.commentPageData.length <= 0;
+        // tslint:disable-next-line:no-console
+        // console.log(`CommentListContainer componentWillMount ${shouldFetchData}`);
         if (!shouldFetchData) {
-            // tslint:disable-next-line:no-console
-            console.log(`CommentListContainer componentMount ${shouldFetchData}`);
             return;
         }
         const page = this.props.commentPageNum || 1;
@@ -79,7 +79,7 @@ class CommentListWrapper extends React.Component<CommentListContainer.IProps> {
             nextPage = this.props.commentPageNum - 1;
         }
         // tslint:disable-next-line:no-console
-        console.log(`CommentListContainer onPageBtn cur:${this.props.commentPageNum}, next:${nextPage}`);
+        // console.log(`CommentListContainer onPageBtn cur:${this.props.commentPageNum}, next:${nextPage}`);
         this.fetchAppComments(nextPage, this.props.token);
     }
 

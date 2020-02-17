@@ -36,4 +36,11 @@ export default class ActionGetter {
             payload
         }
     }
+
+    public static getUpdateSelfCommentAction(payload: any): ActionConstants.IAppAction {
+        return {
+            type: ActionConstants.UPDATE_COMMENT_BY_SELF,
+            payload
+        }
+    }
 }

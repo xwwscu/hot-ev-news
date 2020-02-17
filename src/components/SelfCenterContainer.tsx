@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as AppConstants from './../AppConstants';
@@ -12,6 +13,7 @@ import Toast from 'antd-mobile/lib/toast';
 import 'antd-mobile/lib/toast/style/css';
 import TextareaItem from 'antd-mobile/lib/textarea-item';
 import 'antd-mobile/lib/textarea-item/style/css';
+import ActionGetter from 'src/actions/ActionGetter';
 
 // tslint:disable-next-line:no-namespace
 namespace SelfCenter {
@@ -21,6 +23,7 @@ namespace SelfCenter {
         userId: string;
         userLevel: number;
         token: string;
+        dispatchSelfUpdate?: (payload: any) => void;
     }
 }
 
@@ -82,9 +85,19 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
             // console.log(jsonResp);
             if (jsonResp.msg === 'ok') {
                 Toast.info('恭喜，评论成功!');
-                /* if (this.textInput.current) {
-                    this.textInput.current.clearInput();
-                } */
+                const date = new Date();
+                const commentItem: AppConstants.IComment = {
+                    from_user: {
+                        nick_name: this.props.userNickName
+                    },
+                    comment,
+                    time: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+                }
+                // tslint:disable-next-line:no-console
+                // console.log(`update after comment suc: ${JSON.stringify(commentItem)}`);
+                if (this.props.dispatchSelfUpdate) {
+                    this.props.dispatchSelfUpdate(commentItem)
+                }
                 if (this.mTextInput) {
                     this.mTextInput.clearInput();
                 }
@@ -147,7 +160,7 @@ class SelfCenter extends React.Component<SelfCenter.IProps> {
 
 }
 
-const mapStateToProps = (state: AppConstants.IAppState):SelfCenter.IProps => {
+const mapStateToProps = (state: AppConstants.IAppState): SelfCenter.IProps => {
     return {
         userId: state.userId,
         userNickName: state.userNickName,
@@ -156,6 +169,13 @@ const mapStateToProps = (state: AppConstants.IAppState):SelfCenter.IProps => {
         token: state.token
     }
 };
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        dispatchSelfUpdate: (payload: any) => {
+            dispatch(ActionGetter.getUpdateSelfCommentAction(payload));
+        }
+    }
+}
 
-const SelfCenterContainer = connect(mapStateToProps, null)(SelfCenter);
+const SelfCenterContainer = connect(mapStateToProps, mapDispatchToProps)(SelfCenter);
 export default SelfCenterContainer;

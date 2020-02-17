@@ -40,7 +40,7 @@ export default class CommentList extends React.Component<CommentList.IProps> {
                             <Card.Body>
                                 <div style={{width:"100%", textAlign:"center"}}>{comment.comment}</div>
                             </Card.Body>
-                            <Card.Footer extra={comment.time.substring(0, comment.time.indexOf('T'))} />
+                            <Card.Footer extra={comment.time.substring(0, comment.time.indexOf('T') > 0 ? comment.time.indexOf('T') : comment.time.length)} />
                         </Card>
                     ))
                 }

@@ -38,6 +38,16 @@ export default class RootReducer {
                     commentPageNum: action.payload.commentPageNum,
                     commentTotalPage: action.payload.commentTotalPage
                 });
+            case ActionConstants.UPDATE_COMMENT_BY_SELF:
+                if (state.commentPageNum > 1) {
+                    return state;
+                }
+                const [...latestComments ] = state.commentPageData;
+                latestComments.pop();
+                latestComments.unshift(action.payload);
+                return Object.assign({}, state, {
+                    commentPageData: latestComments
+                });
             default:
                 return state;
         }

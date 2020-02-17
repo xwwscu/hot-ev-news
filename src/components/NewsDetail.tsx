@@ -30,18 +30,31 @@ export default class NewsDetail extends React.Component<INewsDetailProps, INewsD
             fetch(requestUrl, {
                 method: 'GET',
                 mode: 'no-cors'})
-                .then(response => response.json())
-                .then((jsonResp) => {
+                .then(response => {
+                    // tslint:disable-next-line:no-console
+                    console.log(response);
+                    if (response.text) {
+                        this.setState({
+                            pageContent: response.text.toString()
+                        })
+                    }
+                    
+                    // response.json()
+                })
+                /* .then((jsonResp) => {
                     // tslint:disable-next-line:no-console
                     console.log(jsonResp);
                     this.setState({
                         pageContent: jsonResp.pageContent
                     })
-                }).catch (error => 
+                }) */
+                .catch (error => {
+                    // tslint:disable-next-line:no-console
+                    console.error(error);
                     this.setState({
                         pageContent: '<h5>sorry~加载网页失败了...</h5>'
-                    })
-                );
+                    });
+                });
         } else {
             this.setState({
                 pageContent: '<h5>阿拉也不知道去哪里哇~</h5>'
