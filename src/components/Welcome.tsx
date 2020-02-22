@@ -61,7 +61,7 @@ export default class SplashComponent extends React.Component<SplashComponent.IPr
         this.onClosed();
         const w = window.open('about:blank');
         if (w) {
-            w.location.href = 'https://www.byton.cn';
+            w.location.href = 'https://voice.baidu.com/act/newpneumonia/newpneumonia/';
         }
     }
 
