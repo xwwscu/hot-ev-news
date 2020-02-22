@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Modal from 'antd-mobile/lib/modal';
 import 'antd-mobile/lib/modal/style/css';
+import '../styles/Welcome.css';
+import splashImgUrl from '../assets/splash.jpg';
 
 // tslint:disable-next-line:no-namespace
 namespace SplashComponent {
@@ -55,20 +57,35 @@ export default class SplashComponent extends React.Component<SplashComponent.IPr
         this.props.onSplashClosed();
     }
 
+    private onClicked() {
+        this.onClosed();
+        const w = window.open('about:blank');
+        if (w) {
+            w.location.href = 'https://www.byton.cn';
+        }
+    }
+
     public render() {
+        const titleStr='相信未来！';
+        const imgStyle = {
+            width: '270px',
+            height: '325px',
+            backgroundImage: 'url(' + splashImgUrl + ')',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            color: 'black',
+            fontWeight: 800,
+            fontStyle: 'italic'
+          }
+          
         return (
             <Modal
                 visible={this.state.visible}
                 transparent
-                title="武汉加油! 中国加油!"
+                title={null}
                 footer={[{text:`关闭(${this.state.timeLeft}s)`, onPress: () => this.onClosed()}]}>
-                <div>
-                    <br/>
-                    为众人抱薪者，<br/>
-                    不可使其冻毙于风雪。<br/>
-                    为自由开道者，<br/>
-                    不可令其困厄于荆棘。<br/>
-                    <br/>
+                <div style={imgStyle} onClick={() => this.onClicked()}>
+                    {titleStr}
                 </div>
             </Modal>
         );

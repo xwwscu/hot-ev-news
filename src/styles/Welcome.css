@@ -1,0 +1,10 @@
+.am-modal-content {
+      padding: 0px !important;
+      border: 0px;
+      background-clip: padding-box;
+    }
+
+.am-modal-body {
+      padding: 0px !important;
+      line-height: 2 !important;
+    }
