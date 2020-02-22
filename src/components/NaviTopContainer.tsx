@@ -111,7 +111,7 @@ class NaviTopComponent extends React.Component<INaviTopProps, INaviTopState> {
                     rightContent={
                         rightBarView
                     }>
-                    EV快线
+                    EVNews
                 </NavBar>
             </div>
         );
