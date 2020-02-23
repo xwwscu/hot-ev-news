@@ -8,7 +8,8 @@
 
 # production
 # for github pages
-/build/static/*/*.map
+/build/static/js/*.map
+/build/static/css/*.map
 /build/service-worker.js
 
 # misc
