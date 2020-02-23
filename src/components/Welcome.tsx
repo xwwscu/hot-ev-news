@@ -67,7 +67,8 @@ export default class SplashComponent extends React.Component<SplashComponent.IPr
 
     public render() {
         const titleStr='相信未来！';
-        const imgStyle = {
+        const imgAltStr ='疫情终将过去! 春天必会到来!'
+        /* const imgStyle = {
             width: '270px',
             height: '325px',
             backgroundImage: 'url(' + splashImgUrl + ')',
@@ -76,7 +77,7 @@ export default class SplashComponent extends React.Component<SplashComponent.IPr
             color: 'black',
             fontWeight: 800,
             fontStyle: 'italic'
-          }
+          } */
           
         return (
             <Modal
@@ -84,8 +85,9 @@ export default class SplashComponent extends React.Component<SplashComponent.IPr
                 transparent
                 title={null}
                 footer={[{text:`关闭(${this.state.timeLeft}s)`, onPress: () => this.onClosed()}]}>
-                <div style={imgStyle} onClick={() => this.onClicked()}>
-                    {titleStr}
+                <div className="splash-content" onClick={() => this.onClicked()}>
+                    <img className="splash-image" src={splashImgUrl} alt={imgAltStr}/>
+                    <div className="splash-title">{titleStr}</div>
                 </div>
             </Modal>
         );
