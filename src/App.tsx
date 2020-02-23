@@ -7,7 +7,6 @@ import AppContainer from './components/AppContainer';
 import SelfCenterContainer from './components/SelfCenterContainer';
 import CommentsListContainer from './components/CommentListContainer';
 import NewsItem from './components/NewsItem';
-import NewsDetail from './components/NewsDetail';
 
 class App extends React.Component {
   public render() {
@@ -19,7 +18,6 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={AppContainer}/>
               <Route exact path="/news-item" component={NewsItem}/>
-              <Route exact path="/news-detail" component={NewsDetail}/>
               <Route exact path="/self-center" component={SelfCenterContainer}/>
               <Route exact path="/comments" component={CommentsListContainer}/>
             </Switch>
