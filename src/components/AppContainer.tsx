@@ -6,6 +6,7 @@ import ActionGetter from '../actions/ActionGetter';
 import SplashComponent from './Welcome';
 import NewsListContainer from './NewsListContainer';
 import CommentsListContainer from './CommentListContainer';
+import CopyRightFooter from './CopyRightFooter';
 import './../styles/TabBar.css';
 import WhiteSpace from 'antd-mobile/lib/white-space';
 import 'antd-mobile/lib/white-space/style/css';
@@ -88,6 +89,9 @@ export class AppComponent extends React.Component<AppContainer.IProps, AppContai
                         ))
                     }
                 </div>
+                <div style={{width: "100%", alignSelf: "flex-end"}}>
+                    <CopyRightFooter />
+                </div>
                 <SplashComponent visible={!this.props.hasShownSplash} onSplashClosed={this.onSplashClosed} />
             </div>
         );
@@ -110,33 +114,3 @@ const mapDispatchToProps = (dispach: Dispatch) => {
 
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(AppComponent);
 export default AppContainer;
-
-// className="App-tab am-tab-bar-bar am-tab-bar-tab-title"
-{/* <TabBar noRenderContent={false} barTintColor="#108ee9"
-    tintColor="#ff0" unselectedTintColor="#fff"
-    tabBarPosition='bottom'>
-    <TabBar.Item
-        title="快线"
-        key="hot-news"
-        // tslint:disable-next-line:jsx-no-lambda
-        onPress={() => {
-            this.setState({
-                selectedTab: 'hot-news',
-            });
-        }}
-        selected={this.state.selectedTab === 'hot-news'}>
-        {<NewsListContainer />}
-    </TabBar.Item>
-    <TabBar.Item
-        title="社区"
-        key="comments"
-        // tslint:disable-next-line:jsx-no-lambda
-        onPress={() => {
-            this.setState({
-                selectedTab: 'comments',
-            });
-        }}
-        selected={this.state.selectedTab === 'comments'} >
-        {<CommentsListContainer />}
-    </TabBar.Item>
-</TabBar> */}
